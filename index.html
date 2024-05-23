@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App on Server A</title>
+</head>
+<body>
+    <h1>Weather App</h1>
+    <form id="weatherForm">
+        <label for="city">Enter City:</label>
+        <input type="text" id="city" name="city" required>
+        <button type="submit">Get Weather</button>
+    </form>
+    <div id="weatherResult"></div>
+
+    <script>
+        document.getElementById("weatherForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+            var city = document.getElementById("city").value;
+            fetchWeather(city);
+        });
+
+        function fetchWeather(city) {
+            fetch("http://localhost:8080/weather/" + city)
+                .then(response => response.json())
+                .then(data => {
+                    displayWeather(data);
+                })
+                .catch(error => {
+                    console.error("Error fetching weather:", error);
+                    displayError("Error fetching weather. Please try again later.");
+                });
+        }
+
+        function displayWeather(weatherData) {
+            var resultDiv = document.getElementById("weatherResult");
+            resultDiv.innerHTML = "<p>Temperature: " + weatherData.temperature + "°C</p>";
+            resultDiv.innerHTML += "<p>Description: " + weatherData.description + "</p>";
+        }
+
+        function displayError(message) {
+            var resultDiv = document.getElementById("weatherResult");
+            resultDiv.innerHTML = "<p style='color: red;'>" + message + "</p>";
+        }
+    </script>
+</body>
+</html>
