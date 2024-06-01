@@ -18,7 +18,7 @@ type WeatherResponse struct {
 }
 
 func getWeather(w http.ResponseWriter, r *http.Request) {
-	apiKey := os.Getenv("OPENWEATHERMAP_API_KEY")
+	apiKey := os.Getenv("OPENWEATHERMAP_API_KEY") // Set the API key in .env file
 	if apiKey == "" {
 		http.Error(w, "API key not found", http.StatusInternalServerError)
 		return
