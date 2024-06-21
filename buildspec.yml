@@ -5,6 +5,9 @@ env:
     DOCKER_REGISTRY_USERNAME: /my-app/docker-credentials/username
     DOCKER_REGISTRY_PASSWORD: /my-app/docker-credentials/password
     DOCKER_REGISTRY_URL: /my-app/docker-credentials/URL
+    ENVIRONMENT_VAR_1: /my-app/environment-var-1
+    ENVIRONMENT_VAR_2: /my-app/environment-var-2
+
 phases:
   install:
     runtime-versions:
@@ -13,6 +16,12 @@ phases:
     commands:
       - echo "Installing dependencies."
       - go mod download
+      - echo "Creating .env file"
+      - echo "$ENVIRONMENT_VAR_1" > .env
+      - echo "$ENVIRONMENT_VAR_2" >> .env
+      - echo ".env file created"
+
+
   build:
     commands:
       - echo "Building docker image."
