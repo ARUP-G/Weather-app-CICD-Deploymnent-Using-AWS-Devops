@@ -91,6 +91,8 @@ The architecture of the project involves the following components:
     ```sh
     docker run -p 8080:8080 dockerhub-repo/weatherapp:tag 
     ```
+![docker hub](images/docker%20hub.png)
+
 ## Usage
 
 1. Welcome Page:
@@ -132,14 +134,17 @@ The architecture of the project involves the following components:
 ## Configure CodeBuild
 - Create a CodeBuild project:
 
-- Specify the source provider (e.g., GitHub).
-- Set the build environment (choose a managed image with Go installed).
-- Use the buildspec.yml file provided in the repository.
-
 ### Create credentials 
 
 - Go to AWS Systems Manager -> parameter Store
 - Store all the necessary parameters for the CI part.
+![Credentians strore](images/credentials.png)
+
+- Specify the source provider (e.g., GitHub).
+- Set the build environment (choose a managed image with Go installed).
+- Use the `buildspec.yml` file provided in the repository.
+
+
 
 ## Configure CodeDeploy
 
@@ -150,15 +155,19 @@ The architecture of the project involves the following components:
 - Attach the IAM role created for CodeDeploy.
 - Specify the EC2 instances to deploy the application.
 
+
 ## Build and Deploy
 
 - Trigger the build and deploy process:
 
 - Push your changes to the repository.
-- CodeBuild will automatically start building the application based on the buildspec.yml.
-- On successful build, CodeDeploy will deploy the application using the appspec.yml and lifecycle event scripts.
+- CodeBuild will automatically start building the application based on the `buildspec.yml`.
 
+![Code build](images/code%20build%202.png)
 
+- On successful build, CodeDeploy will deploy the application using the `appspec.yml` and lifecycle event scripts.
+
+![Code Deploy](images/deployment-done.png)
 
 ## Contributing
 
