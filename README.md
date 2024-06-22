@@ -2,6 +2,8 @@
 
 This repository contains a Go-based Weather Application that is built and deployed using AWS CodeBuild and CodeDeploy. The Docker image of the application is uploaded to Docker Hub, and the continuous integration and continuous deployment pipeline is orchestrated using AWS DevOps services.
 
+![flow chart](images/aws_devops.png)
+
 ## Table of Contents
 
 - [Features](#features)
